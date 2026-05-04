@@ -1,7 +1,7 @@
 🎵 **多智能体驱动的“听、创、赏”一体化音乐教学平台** 🤖
 ==============================================================
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/LICENSE-2.0)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![AI Powered](https://img.shields.io/badge/AI-DeepSeek_V4_%7C_CLAP_%7C_MuseLoom-ff69b4.svg)]()
 
