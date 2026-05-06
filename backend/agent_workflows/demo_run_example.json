@@ -1,0 +1,33 @@
+{
+  "run_name": "high_school_appreciation_demo",
+  "input": {
+    "audio_name": "sample_audio.wav",
+    "audio_path": "data/samples/sample_audio.wav",
+    "classroom_context": "高中音乐鉴赏课",
+    "user_prompt_overrides": "风格: 印象派; 情绪: 平静; 教学目标: 对比风格重构差异"
+  },
+  "node_outputs": {
+    "analyze_audio": {
+      "style_tags": ["印象派", "室内乐", "抒情"],
+      "mood_tags": ["平静", "温暖", "沉思"],
+      "tempo_bpm": 92,
+      "teaching_hint": "适合用于课堂中的风格迁移和情绪表达分析。"
+    },
+    "revise_prompt": {
+      "revised_prompt": "印象派钢琴片段，情绪平静温暖，适合高中音乐课堂中的风格迁移展示，保留原始旋律骨架。"
+    },
+    "generate_music": {
+      "output_audio": "data/samples/generated_demo.wav",
+      "status": "mock_ready"
+    },
+    "generate_visual_prompt": {
+      "visual_prompt": "一间用于音乐教学展示的空间，光影柔和，画面呈现印象派风格，以流动的色块表达平静与温暖的音乐情绪。",
+      "status": "mock_ready"
+    }
+  },
+  "final_output": {
+    "analysis_result": "available",
+    "generation_result": "available",
+    "visualization_result": "available"
+  }
+}

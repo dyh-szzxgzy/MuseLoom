@@ -1,0 +1,109 @@
+app:
+  name: MuseLoom Multi-Agent Teaching Workflow
+  mode: chatflow
+  version: 0.1.0
+  description: Classroom-oriented orchestration for listening analysis, prompt transformation, music generation, and multimodal appreciation.
+globals:
+  input_variables:
+    - audio_name
+    - audio_path
+    - classroom_context
+    - user_prompt_overrides
+  output_variables:
+    - analysis_result
+    - generation_result
+    - visualization_result
+nodes:
+  - id: start_001
+    type: start
+    title: Demo Start
+    config:
+      expose_inputs:
+        - audio_name
+        - audio_path
+        - classroom_context
+        - user_prompt_overrides
+  - id: analyze_101
+    type: tool
+    title: CLAP Audio Analysis
+    tool: backend.services.clap_service.analyze_audio
+    inputs:
+      audio_name: "{{start_001.audio_name}}"
+      audio_path: "{{start_001.audio_path}}"
+      classroom_context: "{{start_001.classroom_context}}"
+    outputs:
+      - analysis_result
+      - style_tags
+      - mood_tags
+      - tempo_bpm
+      - teaching_hint
+  - id: compose_201
+    type: llm
+    title: Prompt Recipe Composer
+    model: DeepSeek V4
+    prompt_template: |
+      你是音乐教学提示词整理助手。
+      请根据以下信息，为 MuseLoom 输出适合音乐重构的结构化提示词：
+      风格标签: {{analyze_101.style_tags}}
+      情绪标签: {{analyze_101.mood_tags}}
+      节奏: {{analyze_101.tempo_bpm}} BPM
+      教学语境: {{start_001.classroom_context}}
+      用户补充: {{start_001.user_prompt_overrides}}
+      输出要求:
+      1. 保留旋律骨架
+      2. 使用简短中文短句
+      3. 适合高中音乐课堂展示
+    outputs:
+      - revised_prompt
+  - id: guard_301
+    type: condition
+    title: Prompt Validation
+    conditions:
+      - name: has_user_override
+        expression: "start_001.user_prompt_overrides != ''"
+      - name: use_default_prompt
+        expression: "start_001.user_prompt_overrides == ''"
+  - id: generate_401
+    type: tool
+    title: MuseLoom Music Generation
+    tool: backend.services.museloom_service.generate_music
+    inputs:
+      prompt_tags:
+        - "{{compose_201.revised_prompt}}"
+      source_audio: "{{analyze_101.analysis_result.audio_name}}"
+      preserve_melody: true
+    outputs:
+      - generation_result
+      - output_audio
+  - id: visual_501
+    type: tool
+    title: SeedDance Visual Prompt
+    tool: backend.services.seeddance_service.build_visual_prompt
+    inputs:
+      style_tags: "{{analyze_101.style_tags}}"
+      mood_tags: "{{analyze_101.mood_tags}}"
+    outputs:
+      - visualization_result
+      - visual_prompt
+  - id: end_999
+    type: end
+    title: Demo End
+    outputs:
+      analysis_result: "{{analyze_101.analysis_result}}"
+      generation_result: "{{generate_401.generation_result}}"
+      visualization_result: "{{visual_501.visualization_result}}"
+edges:
+  - from: start_001
+    to: analyze_101
+  - from: analyze_101
+    to: compose_201
+  - from: compose_201
+    to: guard_301
+  - from: guard_301
+    to: generate_401
+  - from: analyze_101
+    to: visual_501
+  - from: generate_401
+    to: end_999
+  - from: visual_501
+    to: end_999

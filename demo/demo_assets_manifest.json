@@ -1,0 +1,24 @@
+{
+  "recommended_assets": [
+    {
+      "type": "audio",
+      "path": "data/samples/sample_audio.wav",
+      "purpose": "original classroom demo input"
+    },
+    {
+      "type": "audio",
+      "path": "data/samples/generated_demo.wav",
+      "purpose": "MuseLoom regenerated output"
+    },
+    {
+      "type": "text",
+      "path": "data/samples/sample_visual_prompt.txt",
+      "purpose": "visual appreciation prompt sample"
+    },
+    {
+      "type": "notebook",
+      "path": "models/clap_analysis/notebooks/classroom_case_demo.ipynb",
+      "purpose": "analysis evidence for judges"
+    }
+  ]
+}

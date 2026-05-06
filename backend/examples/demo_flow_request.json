@@ -1,0 +1,12 @@
+{
+  "audio_name": "sample_audio.wav",
+  "audio_path": "data/samples/sample_audio.wav",
+  "classroom_context": "高中音乐鉴赏课",
+  "prompt_tags": [
+    "风格: 印象派",
+    "情绪: 平静",
+    "节奏: 中速",
+    "教学目标: 对比不同风格的表达差异"
+  ],
+  "preserve_melody": true
+}

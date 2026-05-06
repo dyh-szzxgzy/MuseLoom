@@ -1,0 +1,92 @@
+{
+  "workflow_name": "MuseLoom Multi-Agent Teaching Workflow",
+  "mode": "chatflow",
+  "version": "0.1.0",
+  "description": "Roadshow workflow for the listen-create-appreciate teaching loop.",
+  "input_schema": {
+    "audio_name": "string",
+    "audio_path": "string",
+    "classroom_context": "string",
+    "user_prompt_overrides": "string"
+  },
+  "nodes": [
+    {
+      "name": "start",
+      "type": "start",
+      "outputs": [
+        "audio_name",
+        "audio_path",
+        "classroom_context",
+        "user_prompt_overrides"
+      ]
+    },
+    {
+      "name": "analyze_audio",
+      "type": "tool",
+      "tool": "backend.services.clap_service.analyze_audio",
+      "inputs": {
+        "audio_name": "{{start.audio_name}}",
+        "audio_path": "{{start.audio_path}}",
+        "classroom_context": "{{start.classroom_context}}"
+      },
+      "outputs": [
+        "analysis_result",
+        "style_tags",
+        "mood_tags",
+        "tempo_bpm",
+        "teaching_hint"
+      ]
+    },
+    {
+      "name": "revise_prompt",
+      "type": "llm",
+      "tool": "backend.services.llm_service.revise_prompt",
+      "model": "DeepSeek V4",
+      "prompt_template": "根据分析结果生成适合 MuseLoom 重构的中文提示词，保留课堂展示语境与旋律骨架。"
+    },
+    {
+      "name": "generate_music",
+      "type": "tool",
+      "tool": "backend.services.museloom_service.generate_music",
+      "inputs": {
+        "prompt_tags": ["{{revise_prompt.revised_prompt}}"],
+        "source_audio": "{{analyze_audio.analysis_result.audio_name}}",
+        "preserve_melody": true
+      },
+      "outputs": [
+        "generation_result",
+        "output_audio"
+      ]
+    },
+    {
+      "name": "generate_visual_prompt",
+      "type": "tool",
+      "tool": "backend.services.seeddance_service.build_visual_prompt",
+      "inputs": {
+        "style_tags": "{{analyze_audio.style_tags}}",
+        "mood_tags": "{{analyze_audio.mood_tags}}"
+      },
+      "outputs": [
+        "visualization_result",
+        "visual_prompt"
+      ]
+    },
+    {
+      "name": "end",
+      "type": "end",
+      "inputs": {
+        "analysis_result": "{{analyze_audio.analysis_result}}",
+        "generation_result": "{{generate_music.generation_result}}",
+        "visualization_result": "{{generate_visual_prompt.visualization_result}}"
+      }
+    }
+  ],
+  "edges": [
+    ["start", "analyze_audio"],
+    ["analyze_audio", "revise_prompt"],
+    ["revise_prompt", "generate_music"],
+    ["analyze_audio", "generate_visual_prompt"],
+    ["generate_music", "end"],
+    ["generate_visual_prompt", "end"]
+  ]
+}

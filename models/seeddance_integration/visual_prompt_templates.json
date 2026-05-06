@@ -1,0 +1,16 @@
+{
+  "templates": [
+    {
+      "name": "impressionist_classroom",
+      "style_tags": ["印象派", "抒情"],
+      "mood_tags": ["平静", "温暖"],
+      "prompt": "以印象派风格构建课堂视觉场景，用柔和暖色和流动笔触呈现平静而温暖的音乐情绪。"
+    },
+    {
+      "name": "dramatic_contrast",
+      "style_tags": ["交响", "史诗感"],
+      "mood_tags": ["宏大", "推进感"],
+      "prompt": "以层叠舞台光影和强烈构图呈现宏大的音乐张力，适合展示原曲与重构曲目的对比。"
+    }
+  ]
+}

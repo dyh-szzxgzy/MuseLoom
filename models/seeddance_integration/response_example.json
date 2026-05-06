@@ -1,0 +1,10 @@
+{
+  "task_id": "task_demo_001",
+  "status": "succeeded",
+  "images": [
+    {
+      "url": "https://cdn.example.com/museloom/visual_demo.png",
+      "path": "demo/sample_outputs/visual_demo.png"
+    }
+  ]
+}

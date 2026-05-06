@@ -1,0 +1,16 @@
+{
+  "provider": "SeedDance 2.0",
+  "style_tags": ["印象派", "抒情"],
+  "mood_tags": ["平静", "温暖"],
+  "visual_focus": "课堂中的原曲与重构曲对比",
+  "output_format": "visual_prompt_text",
+  "submit_payload": {
+    "prompt": "一间用于音乐教学展示的空间，光影柔和，画面呈现印象派风格，以流动的色块表达平静与温暖的音乐情绪，构图强调课堂中的原曲与重构曲对比。",
+    "negative_prompt": "low quality, blurry, distorted face, watermark",
+    "width": 1024,
+    "height": 1024,
+    "guidance_scale": 7.5,
+    "num_inference_steps": 30,
+    "response_format": "url"
+  }
+}

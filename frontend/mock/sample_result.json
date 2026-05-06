@@ -1,0 +1,22 @@
+{
+  "analysis": {
+    "tempo_bpm": 92,
+    "style_tags": ["印象派", "室内乐", "抒情"],
+    "mood_tags": ["平静", "温暖", "沉思"],
+    "teaching_hint": "适合用于对比风格迁移前后的情绪表达。",
+    "feature_profile": [62, 48, 88, 40, 76],
+    "spectrum_bins": [0.16, 0.24, 0.38, 0.52, 0.66, 0.72, 0.68, 0.58, 0.49, 0.43, 0.35, 0.28, 0.23, 0.2, 0.17, 0.14]
+  },
+  "generation": {
+    "status": "mock_ready",
+    "output_audio": "data/samples/generated_demo.wav",
+    "revised_prompt": "风格: 印象派, 情绪: 平静, 节奏: 中速, 教学目标: 对比不同风格的表达差异"
+  },
+  "visualization": {
+    "status": "mock_ready",
+    "visual_prompt": "柔和的暖色光影穿过音乐教室，画面以流动的笔触表现平静而层叠的旋律起伏，适合用于展示印象派音乐的细腻情绪。"
+  },
+  "runtime": {
+    "source": "mock"
+  }
+}

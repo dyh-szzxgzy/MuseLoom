@@ -1,0 +1,26 @@
+{
+  "analysis": {
+    "audio_name": "data/samples/sample_audio.wav",
+    "tempo_bpm": 92,
+    "style_tags": ["印象派", "室内乐", "抒情"],
+    "mood_tags": ["平静", "温暖", "沉思"],
+    "teaching_hint": "适合用于课堂中的风格迁移和情绪表达分析。",
+    "feature_profile": [62, 48, 88, 40, 76],
+    "spectrum_bins": [0.16, 0.24, 0.38, 0.52, 0.66, 0.72, 0.68, 0.58, 0.49, 0.43, 0.35, 0.28],
+    "status": "mock_ready"
+  },
+  "generation": {
+    "status": "mock_ready",
+    "revised_prompt": "风格: 印象派, 情绪: 平静, 课堂语境: 高中音乐鉴赏课, 教学提示: 适合用于课堂中的风格迁移和情绪表达分析。, 用户补充: 风格: 印象派；情绪: 平静；节奏: 中速；教学目标: 对比不同风格的表达差异, 生成策略: 保留原始旋律骨架",
+    "output_audio": "data/samples/generated_demo.wav",
+    "note": "Current scaffold returns a placeholder output for roadshow demos."
+  },
+  "visualization": {
+    "status": "mock_ready",
+    "visual_prompt": "一间用于音乐教学展示的空间，光影柔和，画面呈现印象派、室内乐、抒情风格，以流动的色块表达平静、温暖、沉思的音乐情绪，构图强调原曲与重构曲目的并置对比。",
+    "provider": "SeedDance 2.0 placeholder",
+    "image_url": null,
+    "image_path": "demo/sample_outputs/visual_demo.png",
+    "task_id": null
+  }
+}

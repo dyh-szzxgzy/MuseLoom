@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MuseLoom 音乐教学平台</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">MuseLoom</p>
+        <h1>多智能体驱动的“听、创、赏”一体化音乐教学平台</h1>
+        <p class="summary">
+          从音频解析到风格迁移，再到跨模态视觉生成，用一条完整的教学链路帮助学生从被动聆听走向主动创作。
+        </p>
+        <div class="hero-actions">
+          <button id="runDemoButton" class="primary-button">运行演示流程</button>
+          <span id="runtimeBadge" class="runtime-badge">等待演示</span>
+        </div>
+      </div>
+
+      <aside class="hero-aside">
+        <div class="hero-metric">
+          <span class="hero-metric-label">核心主线</span>
+          <strong>听 · 创 · 赏</strong>
+        </div>
+        <div class="hero-metric">
+          <span class="hero-metric-label">模型协作</span>
+          <strong>CLAP + MuseLoom + SeedDance</strong>
+        </div>
+        <div class="hero-metric">
+          <span class="hero-metric-label">课堂目标</span>
+          <strong>低门槛音乐创作启蒙</strong>
+        </div>
+      </aside>
+    </header>
+
+    <section class="story-grid">
+      <article class="story-card">
+        <span class="story-step">01</span>
+        <h2>听</h2>
+        <p>自动识别音频的旋律走势、节拍与情绪标签，把抽象听觉转成可教学的结构化特征。</p>
+      </article>
+      <article class="story-card">
+        <span class="story-step">02</span>
+        <h2>创</h2>
+        <p>学生只需修改提示词，就能完成风格重构与创作实验，降低音乐生成参与门槛。</p>
+      </article>
+      <article class="story-card">
+        <span class="story-step">03</span>
+        <h2>赏</h2>
+        <p>根据新生成音乐自动构建视觉化描述，辅助学生理解审美差异与情绪表达。</p>
+      </article>
+    </section>
+
+    <section class="panel-grid panel-grid-wide">
+      <section class="panel">
+        <h2>音频分析结果</h2>
+        <div id="analysisCards" class="card-grid"></div>
+        <div id="featureBoard" class="feature-board"></div>
+      </section>
+
+      <section class="panel">
+        <h2>提示词编辑</h2>
+        <textarea id="promptEditor" rows="8">风格: 印象派
+情绪: 平静
+节奏: 中速
+教学目标: 对比不同风格的表达差异</textarea>
+      </section>
+    </section>
+
+    <section class="panel-grid">
+      <section class="panel">
+        <h2>动态声谱图</h2>
+        <canvas id="spectrumCanvas" width="720" height="220"></canvas>
+      </section>
+
+      <section class="panel">
+        <h2>视觉化描述</h2>
+        <div id="visualPrompt" class="visual-prompt"></div>
+      </section>
+    </section>
+
+    <section class="panel-grid panel-grid-wide">
+      <section class="panel">
+        <h2>音频上传与预览</h2>
+        <div class="upload-zone">
+          <input id="audioInput" type="file" accept="audio/*" />
+          <div class="upload-meta">
+            <span id="audioFileName" class="upload-filename">未选择音频文件</span>
+            <span class="upload-hint">支持本地试听与演示切换</span>
+          </div>
+        </div>
+        <div class="audio-grid">
+          <article class="audio-card">
+            <strong>原曲</strong>
+            <audio id="originalAudio" controls src="./../data/samples/sample_audio.wav"></audio>
+          </article>
+          <article class="audio-card">
+            <strong>生成曲</strong>
+            <audio id="generatedAudio" controls src="./../data/samples/generated_demo.wav"></audio>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>系统状态</h2>
+        <div id="runtimeInfo" class="status-list"></div>
+      </section>
+
+      <section class="panel">
+        <h2>教学价值提示</h2>
+        <div class="teaching-list">
+          <article class="teaching-item">
+            <strong>感知可视化</strong>
+            <p>把节奏、情绪和风格标签转成学生看得懂、能对比的课堂材料。</p>
+          </article>
+          <article class="teaching-item">
+            <strong>创作低门槛</strong>
+            <p>通过修改提示词而不是编曲细节，让学生先建立风格与表达的映射关系。</p>
+          </article>
+          <article class="teaching-item">
+            <strong>结果可讲解</strong>
+            <p>原曲、重构曲和视觉描述能形成连续的展示逻辑，适合路演和课堂展示。</p>
+          </article>
+        </div>
+      </section>
+    </section>
+
+    <section class="panel-grid panel-grid-wide">
+      <section class="panel">
+        <h2>结构化结果</h2>
+        <pre id="resultJson" class="result-block"></pre>
+      </section>
+
+      <section class="panel">
+        <h2>推荐演示话术</h2>
+        <div id="demoNarrative" class="narrative-block">
+          点击“运行演示流程”后，这里会生成适合路演展示的说明文本。
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <script src="./js/spectrum_render.js"></script>
+  <script src="./js/echarts_board.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
